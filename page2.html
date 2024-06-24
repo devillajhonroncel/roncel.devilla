@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+			
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: black;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+		 .store-logo {
+            height: 150px;
+            width: 300px;
+            margin-right: 10px;
+        }
+		.store-header h1 {
+            color: white;
+            margin: 0;
+        }
+		  .store-header {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+		
+		.back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+		
+		img {
+			 border: none;
+			 width: 180px;
+			 height: 180px;
+			 }
+    </style>
+</head>
+<body>
+  <div class="store-header">
+        <img class="devilla copy" src="devilla copy.jpg" alt="devilla copy">
+        <h1>supreme</h1>
+    </div>
+    <h1>Add stock</h1>
+
+    <div>
+        <form id="replenishForm">
+            <label for="itemName">Item Name:</label>
+            <select id="itemName">
+                <!-- Populate this dropdown with item names -->
+            </select><br><br>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" min="1"><br><br>
+            <button type="submit">Add Stock</button>
+        </form>
+    </div>
+
+    <div class="back-link">
+        <a href="html.html">Back to Homepage</a>
+    </div>
+
+    <script>
+        // Define stock for each item
+        const itemStock = {
+            'Casual shorts': 10,
+            'Casual shorts ': 8,
+            'Casual shorts': 6,
+            'Casual shorts': 12,
+            'Classic t-shir': 15,
+            'Classic t-shir': 20,
+            ' Classic t-shir': 18,
+            'Classic t-shir': 10,
+            'Casual sando': 25,
+            'Casual sando': 20,
+            'Casual sando': 20,
+            'Casual sando': 15,
+            'Fragrant perfume': 5,
+            'Fragrant perfume': 7,
+            'Fragrant perfume': 4,
+            'Fragrant perfumer': 6,
+            'Assorted toys': 25,
+            'Assorted toys': 20,
+            'Assorted toys': 35
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const itemNameDropdown = document.getElementById("itemName");
+
+            // Populate the dropdown with item names
+            for (const itemName in itemStock) {
+                const option = document.createElement("option");
+                option.text = itemName;
+                itemNameDropdown.add(option);
+            }
+
+            // Handle form submission
+            const replenishForm = document.getElementById("replenishForm");
+            replenishForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                const itemName = itemNameDropdown.value;
+                const quantity = parseInt(document.getElementById("quantity").value);
+
+                if (!itemName || isNaN(quantity) || quantity <= 0) {
+                    alert("Please select an item and enter a valid quantity.");
+                    return;
+                }
+
+                
+                itemStock[itemName] += quantity;
+                alert(Stock added for ${itemName}. New stock: ${itemStock[itemName]});
+
+                // Reset the form
+                replenishForm.reset();
+            });
+        });
+    </script>
+
+</body>
+</html>

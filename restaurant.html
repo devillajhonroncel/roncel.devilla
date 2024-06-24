@@ -1,0 +1,182 @@
+<html>
+<head>
+ <title>eat well</title>
+ <style>
+         img {
+            border: none;
+            width: 300px;
+			height: 300px;
+			margin-right: 10px;
+			}
+ </style>
+ </head>
+ 
+<body> 
+ <h1 align = "center">EAT WELL</h1>
+ <hr>
+  <div class ="buttons" align = "center">
+ 
+
+ <div>
+ <div class  " menu-container">
+    <div class="menu buttons"> 
+ <button class="menu button" onclick="showCategory('MAIN DISH')">MAIN DISH</button>
+<button class="menu button" onclick="toggleCategory('VEGTABLES')">VEGTABLES</button>
+ <button class="menu button" onclick="showCategory('DESERT')">DESERT</button>
+ <button class="menu button" onclick="showCategory('DRINKS')">DRINKS</button>
+ <button class="menu button" onclick="showCategory(ADD ONNS)">ADD ONNS</button>
+ </div>
+ 
+<div id="menu-item MAIN DISH" class="menu-images">
+      <img src="Adobo.jpeg" alt ="adobo">
+<p class="adobo">adobo 90.00</p>
+    <button class="Purchase" onclick="buyItem('adobo')">Buy</button>
+    </div>
+	
+	<div id="menu-item MAIN DISH" class="menu-images">
+      <img src="Kare-kare.jpeg" alt="kare-kare">
+<p class="kare-kare">kare-kare 75.00</p>
+    <button class="Purchase" onclick="buyItem('kare-kare')">Buy</button>
+    </div>
+	<div id="menu-item MAIN DISH" class="menu-images">
+      <img src="Sisig.jpeg" alt="sisig">
+<p class="sisig">sisig 120.00</p>
+    <button class="Purchase" onclick="buyItem('sisig')">Buy</button>
+    </div>
+	
+    <div id="menu-item MAIN DISH" class="menu-images">
+      <img src="Chicken curry.jpeg" alt="Chicken curty">
+<p class="Chicken curry"> Chicken curry 95.00</p>
+    <button class="Purchase" onclick="buyItem('chicken curry')">Buy</button>
+    </div>
+	
+	
+    <div id="menu-item MAIN DISH" class="menu-images">
+      <img src="Sinigang na hipon.jpeg" alt="sinigang na hipon">
+<p class="sinigang na hipon">sinigang na hipon 86.70</p>
+    <button class="Purchase" onclick="buyItem('sinigang na hipon')">Buy</button>
+    </div>
+  <hr>
+  
+<div id="menu-item VEGTABLES" class="menu-images">
+    <div class="menu-image-container">
+      <img src="inataang kalabasa.jpeg" alt ="Ginataang kalabasa">
+<p class="Ginataang kalabasa">adobo 90.00</p>
+    <button class="Purchase" onclick="buyItem('Ginataang kalabasa')">Buy</button>
+    </div>
+    
+      
+<div id=" menu-item VEGTABLES" class="menu-images">
+      <img class="menu-image" src="Pakbit.jpeg" alt="pakbit">
+<p class="sisig">pakbit 120.00</p>
+    <button class="Purchase" onclick="buyItem('pakbit')">Buy</button>
+    </div>
+    
+  
+<div id="menu-item VEGTABLES" class="menu-images">
+      <img src="inataang langka.jpeg" alt="Ginataang langka">
+<p class="Ginataang langka"> Ginataang langka 95.00</p>
+    <button class="Purchase" onclick="buyItem('Ginataang langka')">Buy</button>
+    </div>
+    
+  
+<div id=" menu-itemVEGTABLES" class="menu-images">
+      <img src="Kare-kare.jpeg" alt="kare-kare">
+<p class="kare-kare">Kare-kare 86.70</p>
+    <button class="Purchase" onclick="buyItem('kare-kare')">Buy</button>
+    </div>
+  </div>
+<hr>
+
+<div id=" menn-item DESSERT" class="menu-images">
+      <img src="Ice cream.jpeg" alt ="ice cream">
+<p class="ice cream">ice cream 90.00</p>
+    <button class="Purchase" onclick="buyItem('ice cream')">Buy</button>
+    </div>
+
+<div id=" menn-item DESSERT" class="menu-images">
+      <img src="Lecheplan.jpeg" alt="Lecheplan">
+<p class="lecheplan">lecheplan 75.00</p>
+    <button class="Purchase" onclick="buyItem('lecheplan')">Buy</button>
+    </div>
+    
+ <div id=" menn-item DESSERT" class="menu-images">
+      <img src="Bananasplit.jpeg" alt="bananasplit">
+<p class="bananasplit">bananasplit 86.70</p>
+    <button class="Purchase" onclick="buyItem('bananasplit')">Buy</button>
+    </div>
+  </div>
+  <hr>
+  
+<div id=" menu-item DRINKS" class="menu-images">
+      <img src="Coke.jpeg" alt ="Coke">
+<p class="Coke">Coke 90.00</p>
+    <button class="Purchase" onclick="buyItem('Coke')">Buy</button>
+      </div>
+      
+    <div class="menu-image-container">
+      <img src="Sprite.jpeg" alt="Sprite">
+<p class="Sprite">Sprite 75.00</p>
+    <button class="Purchase" onclick="buyItem('Sprite')">Buy</button>
+    </div>
+    
+    <div class="menu-image-container">
+      <img src="Water.jpeg" alt="Water">
+<p class="Water">Water 86.70</p>
+    <button class="Purchase" onclick="buyItem('Water')">Buy</button>
+    </div>
+  </div>
+  <hr>
+
+
+<script>
+        var orders = [];
+
+        function toggleCategory(category) {
+            var dishes = document.getElementsByClassName('menu-item-image-container');
+            for (var i = 0; i < dishes.length; i++) {
+                if (dishes[i].classList.contains(category)) {
+                    dishes[i].style.display = "block";
+                } else {
+                    dishes[i].style.display = "none";
+                }
+            }
+        }
+
+        function addItem(itemName, price) {
+            var quantityInput = event.target.previousElementSibling;
+            var quantity = parseInt(quantityInput.value);
+            if (quantity > 0) {
+                orders.push({
+                    name: itemName,
+                    price: price,
+                    quantity: quantity
+                });
+                quantityInput.value = 0;
+                updateOrderList();
+            }
+        }
+
+        function updateOrderList() {
+            var orderList = document.getElementById('orderList');
+            orderList.innerHTML = ''; 
+
+            var total = 0;
+            orders.forEach(function(order) {
+                var listItem = document.createElement('li');
+                listItem.innerText = `${order.name} - Total Items: ${order.quantity} = P${order.price * order.quantity}`;
+                orderList.appendChild(listItem);
+                total += order.price * order.quantity;
+            });
+
+            document.getElementById('totalOrder').innerText = 'P' + total;
+        }
+
+        function calculateTotalOrder() {
+            updateOrderList();
+        }
+    </script>
+
+</body>
+</head>
+</html>

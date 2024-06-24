@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <header>
+        <h1>Welcome to Supreme Store</h1>
+		<img src = "devilla copy.jpg" alt ="devilla copy">
+    </header>
+    <section>
+        <button onclick="displayProducts('jeans')">jeans</button>
+        <button onclick="displayProducts('T-shirt')">T-shirts</button>
+        <button onclick="displayProducts('Toys')">Toys</button>
+        <button onclick="displayProducts('Perfume')">Perfume</button>
+        <button onclick="displayProducts('Sando')">Sando</button>
+        <button onclick="clearCart()">Clear Cart</button>
+		
+    </section>
+    <section id="products">
+        <!-- Products will be displayed here -->
+    </section>
+    <footer>
+        <div id="receipt"></div>
+        <p id="total">Total: $0.00</p>
+	
+        <button onclick="alert('Thank you for shopping!')">Checkout</button>
+        <p>&copy; sumpreme Store. All rights reserved.</p>
+         <a href="page2.html"> add stock</a>
+         <a href="page3.html"> discounted price</a>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sari-Sari Store</title>
+    <style>
+	
+	
+		
+	
+	
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+			
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+        .product {
+            display: inline-block;
+            width: 200px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+			}
+			
+			img {
+			 border: none;
+			 width: 180px;
+			 height: 180px;
+			 }
+			 
+			 
+        
+    </style>
+	
+		<script>
+			var products = [
+				{ name: "jeans", price: 2009, stock: 109, image: "pictures4.jpeg", description: "Casual shorts" },
+				{ name: "jeans", price: 2050, stock: 710, image: "pictures4.jpeg", description: "Casual shorts" },
+				{ name: "jeans", price: 2060, stock: 120, image: "pictures4.jpeg", description: "Casual shorts" },
+				{ name: "jeans", price: 2040, stock: 180, image: "pictures4.jpeg", description: "Casual shorts" },
+				{ name: "T-shirt", price: 1180, stock: 145, image: "pictures1.jpeg", description: "Classic t-shirt" },
+				{ name: "T-shirt", price: 1780, stock: 195, image: "pictures1.jpeg", description: "Classic t-shirt" },
+				{ name: "T-shirt", price: 1900, stock: 145, image: "pictures1.jpeg", description: "Classic t-shirt" },
+				{ name: "T-shirt", price: 11790, stock: 185, image: "pictures1.jpeg", description: "Classic t-shirt" },
+				{ name: "Toys", price: 89909, stock: 210, image: "pictures3.jpeg", description: "Assorted toys" },
+				 { name: "Toys", price: 89099, stock: 260, image: "pictures3.jpeg", description: "Assorted toys" },
+				  { name: "Toys", price: 89699, stock: 290, image: "pictures3.jpeg", description: "Assorted toys" },
+				   { name: "Toys", price: 8999, stock: 820, image: "pictures3.jpeg", description: "Assorted toys" },
+				{ name: "Perfume", price: 20755, stock: 9, image: "pictures2.jpeg", description: "Fragrant perfume" },
+				{ name: "Perfume", price: 20785, stock: 8, image: "pictures2.jpeg", description: "Fragrant perfume" },
+				{ name: "Perfume", price: 20755, stock: 10, image: "pictures2.jpeg", description: "Fragrant perfume" },
+				{ name: "Perfume", price: 20545, stock: 8, image: "pictures2.jpeg", description: "Fragrant perfume" },
+				{ name: "Sando", price: 12060, stock: 7, image: "pictures5.jpeg", description: "Casual sando" },
+				 { name: "Sando", price: 12770, stock: 8, image: "pictures5.jpeg", description: "Casual sando" },
+				  { name: "Sando", price: 12800, stock: 10, image: "pictures5.jpeg", description: "Casual sando" },
+				   { name: "Sando", price: 12600, stock: 9, image: "pictures5.jpeg", description: "Casual sando" },
+			];
+
+			var cart = [];
+
+        function addToCart(productName, price) {
+            var product = products.find(p => p.name === productName);
+            if (product.stock > 0) {
+                cart.push({ name: productName, price: price });
+                product.stock--;
+                calculateTotal();
+                updateReceipt();
+            } else {
+                alert("Sorry, " + productName + " is out of stock!");
+            }
+        }
+
+        function calculateTotal() {
+            var total = 0;
+            cart.forEach(function(item) {
+                total += item.price;
+            });
+            document.getElementById('total').textContent = 'Total: $' + total.toFixed(2);
+        }
+
+        function updateReceipt() {
+            var receipt = document.getElementById('receipt');
+            receipt.innerHTML = ''; // Clear existing receipt
+
+            cart.forEach(function(item) {
+                var itemElement = document.createElement('div');
+                itemElement.textContent = item.name + ': $' + item.price.toFixed(2);
+                receipt.appendChild(itemElement);
+            });
+        }
+
+        function clearCart() {
+            cart.forEach(function(item) {
+                var product = products.find(p => p.name === item.name);
+                product.stock++;
+            });
+            cart = [];
+            calculateTotal();
+            updateReceipt();
+        }
+
+        function displayProducts(category) {
+            var section = document.getElementById('products');
+            section.innerHTML = '';
+
+            var filteredProducts = products.filter(function(product) {
+                return product.name === category;
+            });
+
+            filteredProducts.forEach(function(product) {
+                var productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+
+                var image = document.createElement('img');
+                image.src = product.image;
+                image.alt = product.name;
+                productDiv.appendChild(image);
+
+                var title = document.createElement('h3');
+                title.textContent = product.name;
+                productDiv.appendChild(title);
+
+                var description = document.createElement('p');
+                description.textContent = product.description;
+                productDiv.appendChild(description);
+
+                var price = document.createElement('p');
+                price.classList.add('price');
+                price.textContent = '$' + product.price.toFixed(2);
+                productDiv.appendChild(price);
+
+                var stock = document.createElement('p');
+                stock.textContent = 'Stock: ' + product.stock;
+                productDiv.appendChild(stock);
+
+                var addButton = document.createElement('button');
+                addButton.textContent = 'Add to Cart';
+                addButton.onclick = function() {
+                    addToCart(product.name, product.price);
+                };
+                productDiv.appendChild(addButton);
+
+                section.appendChild(productDiv);
+            });
+        }
+		
+
+		
+         </script>
+       </head>
+    </footer>
+ </body>
+</html>

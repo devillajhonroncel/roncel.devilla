@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Status and Contact</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f7f9fc;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .container {
+            text-align: left;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        h1, h2 {
+            color: #333;
+            font-weight: 700;
+        }
+        p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .btn-primary {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-size: 18px;
+            padding: 12px 24px;
+            border-radius: 25px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .profile-photo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-photo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .content {
+            margin-left: 160px; /* Adjust margin to fit content next to the photo */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="final_act1.jpeg" alt="Profile Photo" class="profile-photo">
+        <div class="content">
+            <h1 class="mb-4">My Personal Status</h1>
+            <p><strong>Name:</strong> Jhon Roncel</p>
+            <p><strong>Status:</strong> Final Project</p>
+            <p><strong>Location:</strong> San Gregorio, Laurel, Batangas</p>
+            <h2 class="mt-4">Contact Information</h2>
+            <p><strong>Email:</strong> jhonroncel.devilla@citycollegeoftagaytay.edu.ph</p>
+            <p><strong>Phone:</strong> 09074546320</p>
+            <button class="btn btn-primary mt-4" onclick="goToNextPage()">Projects</button>
+        </div>
+    </div>
+    <script>
+        function goToNextPage() {
+            window.location.href = "devilla_project.html";
+        }
+    </script>
+</body>
+</html>
